@@ -16,44 +16,45 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{route('create')}}">Create</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
 
-      <form action="{{route('store')}}" method="post" enctype="multipart/form-data">
+      <form action="{{route('edit', $data->id)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('patch')
         <div class="mb-3">
           <label for="" class="form-label">Nama</label>
-          <input type="text" class="form-control" id="" aria-describedby="emailHelp" name="nama">
+          <input value="{{$data->nama}}" type="text" class="form-control" id="" aria-describedby="emailHelp" name="nama">
         </div>
         <div class="mb-3">
           <label for="" class="form-label">NIM</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="nim">
+          <input value="{{$data->nim}}" type="text" class="form-control" id="exampleInputPassword1" name="nim">
         </div>
-
         <div class="mb-3">
-              <label for="" class="form-label">Fakultas</label>
-              <select class="form-select" aria-label="Default select example" name="fakultas">
-                @foreach ($data as $fakultas)
-                    <option value="{{$fakultas->id}}">{{$fakultas->fakultas}}</option>
-                @endforeach
-              </select>
-          </div>
-
+            <label for="" class="form-label">Fakultas</label>
+            <select class="form-select" aria-label="Default select example" name="fakultas">
+              @foreach ($fakultas as $f)
+                <option value="{{$f->id}}" {{$data->id_fakultas == $f->id ? 'selected' : ''}}>{{$f->fakultas}}</option>
+              @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label for="" class="form-label">Semester</label>
-            <input type="number" class="form-control" id="" name="semester">
+            <input value="{{$data->semester}}" type="number" class="form-control" id="" name="semester">
           </div>
           <div class="mb-3">
             <label for="" class="form-label">Tanggal Lahir</label>
-            <input type="date" class="form-control" id="" name="tgl_lahir">
+            <input value="{{$data->tgl_lahir}}" type="date" class="form-control" id="" name="tgl_lahir">
           </div>
           <div class="mb-3">
             <label for="" class="form-label">Alamat</label>
-            <input type="text" class="form-control" id="" name="alamat">
+            <input value="{{$data->alamat}}" type="text" class="form-control" id="" name="alamat">
           </div>
-
           <div class="mb-3">
             <label for="" class="form-label">Image</label>
             <input type="file" class="form-control" id="" name="image">

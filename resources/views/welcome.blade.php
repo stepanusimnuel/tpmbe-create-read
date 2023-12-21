@@ -29,10 +29,18 @@
           @foreach($mahasiswa as $mhs)
       <div class="card" style="width: 18rem;">
         <div class="card-body">
+          <img src="{{asset('/storage/image/' . $mhs->image)}}" class="card-img-top" alt="{{$mhs->nama . '-' . $mhs->nim}}">
           <h5 class="card-title">{{$mhs->nama}} ({{$mhs-> nim}})</h5>
+          <p class="card-text">{{$mhs->fakultas->fakultas}}</p>
           <p class="card-text">{{$mhs->tgl_lahir}}</p>
           <p class="card-text">Semester: {{$mhs->semester}}</p>
           <p class="card-text">{{$mhs->alamat}}</p>
+          <a href="{{route('update', $mhs->id)}}" class="btn btn-warning">Edit Data</a>
+          <form action="{{route('delete', $mhs->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete Data</button>
+        </form>
         </div>
         @endforeach
       </div>

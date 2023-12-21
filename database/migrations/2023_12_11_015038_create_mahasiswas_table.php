@@ -18,6 +18,11 @@ return new class extends Migration
             $table->integer("semester");
             $table->date("tgl_lahir");
             $table->string("alamat");
+            $table->string("image");
+
+            $table->unsignedBigInteger("id_fakultas");
+            $table->foreign('id_fakultas')->references('id')->on('fakultas')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
